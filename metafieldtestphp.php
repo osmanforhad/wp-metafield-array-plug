@@ -222,7 +222,8 @@ class MetaFieldtest {
            <label for="cbx_label">%4$s &nbsp;&nbsp;&nbsp;</label>
                <input name="%1$s" id="%2$s" placeholder="%3$s" value="%5$s"/>
                <hr>
-                                   </p>',
+								   </p>',
+								   
 						$field['name'],//imagine index 1
 						$field['id'],//imagine index 2
 						$field['placeholder'],//imagine index 3
@@ -506,37 +507,37 @@ class MetaFieldtest {
 	/*save data into db table*/
 	public function cbx_save_data( $post_id ) {
 
-		/*condition check*/
-		if (
-			isset( $_POST['meta_text'] )
-			&& isset( $_POST['meta_email'] )
-			&& isset( $_POST['meta_pass'] )
-			&& isset( $_POST['meta_number'] )
-			&& isset( $_POST['meta_url'] )
-			&& isset( $_POST['meta_textarea'] )
-			&& isset( $_POST['meta_multicheck'] )
-			&& isset( $_POST['meta_radio'] )
-			&& isset( $_POST['cbxmeta_select'] )
-			&& isset( $_POST['multi_selectmeta'] )
-		) {
+		/*condition check for every field*/
+		
+			$text_field = isset( $_POST['meta_text'] ) ? $_POST['meta_text'] :'';
+			$emial_field = isset( $_POST['meta_email'] ) ? $_POST['meta_email'] :'';
+			$pass_field =  isset( $_POST['meta_pass'] )  ? $_POST['meta_pass'] :'';
+			$number_field =  isset( $_POST['meta_number'] ) ? $_POST['meta_number'] :'';
+			$url_field = isset( $_POST['meta_url'] ) ? $_POST['meta_url'] :'';
+			$textarea_field =  isset( $_POST['meta_textarea'] ) ? $_POST['meta_textarea'] :'';
+			$multicheck_field =  isset( $_POST['meta_multicheck'] ) ? $_POST['meta_multicheck'] : array();
+			$radio_field = isset( $_POST['meta_radio'] ) ? $_POST['meta_radio'] : '';
+			$select_field =  isset( $_POST['cbxmeta_select'] ) ? $_POST['cbxmeta_select'] :'';
+			$multiselect_field = isset( $_POST['multi_selectmeta'] ) ? $_POST['multi_selectmeta'] :array();
+		
 
 			/*catch data as array*/
 			$inputData                     = array();
-			$inputData['meta_text']        = $_POST['meta_text'];
-			$inputData['meta_email']       = $_POST['meta_email'];
-			$inputData['meta_pass']        = $_POST['meta_pass'];
-			$inputData['meta_number']      = $_POST['meta_number'];
-			$inputData['meta_url']         = $_POST['meta_url'];
-			$inputData['meta_textarea']    = $_POST['meta_textarea'];
-			$inputData['meta_multicheck']  = $_POST['meta_multicheck'];
-			$inputData['meta_radio']       = $_POST['meta_radio'];
-			$inputData['cbxmeta_select']   = $_POST['cbxmeta_select'];
-			$inputData['multi_selectmeta'] = $_POST['multi_selectmeta'];
+			$inputData['meta_text']        = $text_field;
+			$inputData['meta_email']       = $emial_field ;
+			$inputData['meta_pass']        = $pass_field;
+			$inputData['meta_number']      = $number_field;
+			$inputData['meta_url']         = $url_field;
+			$inputData['meta_textarea']    = $textarea_field;
+			$inputData['meta_multicheck']  = $multicheck_field;
+			$inputData['meta_radio']       = $radio_field;
+			$inputData['cbxmeta_select']   = $select_field;
+			$inputData['multi_selectmeta'] = $multicheck_field;
 
 			/*submit data into db table*/
 			update_post_meta( $post_id, '_cbxmetaArray', $inputData );
 
-		}
+		
 
 //write_log('cbx_save_data');
 
