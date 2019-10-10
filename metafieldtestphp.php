@@ -374,8 +374,9 @@ class MetaFieldtest {
 					foreach ( $conditions as $condition ) {
 						$selected = '';
 
+					$radio = 	isset($value['meta_radio']) ? $value['meta_radio']:'';
 						/*check condition for geting specific value*/
-						if ( $value['meta_radio'] == $condition ) {
+						if ( $radio == $condition ) {
 							/*for radio check*/
 							$selected = 'checked';
 						}
